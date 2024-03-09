@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { posterModel } from "./poster.js";
+import { userModel } from "./user.js";
 
 const productSchema = new mongoose.Schema({
   name: String,
@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   information: [String],
   poster: {
     type: mongoose.Types.ObjectId,
-    ref: posterModel,
+    ref: userModel,
   },
 });
 
