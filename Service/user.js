@@ -7,15 +7,16 @@ export const showUsers = async (req, res, next) => {
 };
 
 export const createUser = async (req, res, next) => {
-  const { fullname, age, email, password, address } = req.body;
+  console.log(req.body);
+  const { fullname, account, email, password } = req.body;
+
   const salts = await bcrypt.genSalt(10);
   const hashingPassword = await bcrypt.hash(password, salts);
   const user = await userModel.create({
     fullname,
-    age,
+    account,
     email,
     password: hashingPassword,
-    address,
   });
   res.status(200).send(user);
 };

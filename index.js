@@ -4,19 +4,20 @@ import dotenv from "dotenv";
 import { productRoute } from "./Controller/product.js";
 import { userRoute } from "./Controller/user.js";
 import { authRoute } from "./Controller/auth.js";
+import cors from "cors";
 
 dotenv.config();
 
 const server = express();
-
+server.use(cors());
 server.use(express.json());
 
 server.use("/products", productRoute);
 server.use("/users", userRoute);
 server.use("/auth", authRoute);
-server.use("/", (req, res) => {
-  res.status(200).send(`Hello world!`);
-});
+// server.use("/", (req, res) => {
+//   res.status(200).send(`Hello world!`);
+// });
 
 mongoose
   .connect(process.env.MONGODB)

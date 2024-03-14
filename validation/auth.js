@@ -1,9 +1,21 @@
 export const validateRegister = (req, res, next) => {
-  const { fullname, age, email, password, address } = req.body;
+  const { fullname, account, email, password } = req.body;
   if (!fullname) throw new Error("Fullname is required");
-  if (!age) throw new Error("Age is required");
+  if (!account) throw new Error("Account is required");
   if (!email) throw new Error("Email is required");
   if (!password) throw new Error("Password is required");
-  if (!address) throw new Error("Address is required");
+  next();
+};
+
+export const validateLogin = (req, res, next) => {
+  const { username, email, password } = req.body;
+  if (!username && !email) throw new Error("Username or email is required!");
+  if (!password) throw new Error("Password is required!");
+  next();
+};
+
+export const validateRefresh = (req, res, next) => {
+  const { refreshToken } = req.body;
+  if (!refreshToken) throw new Error("Refresh token is required!");
   next();
 };
