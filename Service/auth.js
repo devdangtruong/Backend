@@ -18,8 +18,8 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  const { account, email, password } = req.body;
-  const user = await userModel.findOne({ account, email });
+  const { account, password } = req.body;
+  const user = await userModel.findOne({ account });
   const result = bcrypt.compare(password, user.password);
   if (!result) {
     throw new Error(`User, email or password is incorrect`);
@@ -27,7 +27,6 @@ export const login = async (req, res, next) => {
   const payload = {
     id: user._id.toString(),
     account: user.account,
-    email: user.email,
   };
   const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_TOKEN, {
     expiresIn: "30s",

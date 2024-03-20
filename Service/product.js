@@ -1,7 +1,7 @@
 import { productModel } from "../Model/product.js";
 import { faker } from "@faker-js/faker";
 const showProducts = async (req, res, next) => {
-  const products = await productModel.find().populate(`poster`);
+  const products = await productModel.find();
   res.status(200).send(products);
 };
 
@@ -10,6 +10,7 @@ const postProducts = async (req, res, next) => {
   const products = await productModel.create({
     name: body.name,
     price: body.price,
+    image: body.image,
     information: faker.lorem.paragraph({ min: 1, max: 3 }),
   });
   res.status(200).send(products);

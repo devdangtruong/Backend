@@ -8,8 +8,8 @@ export const validateRegister = (req, res, next) => {
 };
 
 export const validateLogin = (req, res, next) => {
-  const { username, email, password } = req.body;
-  if (!username && !email) throw new Error("Username or email is required!");
+  const { account, email, password } = req.body;
+  if (!account && !email) throw new Error("Username or email is required!");
   if (!password) throw new Error("Password is required!");
   next();
 };
